@@ -100,9 +100,9 @@ for l = 2:L
             w = sqrt((l-abs(m)-1)*(l-abs(m))/denom)*(1-d)*(-0.5);
             
             % computes Eq.8.1
-            if u~=0, u = u*U(l,m,n,R_1,R_lm1); end
-            if v~=0, v = v*V(l,m,n,R_1,R_lm1); end
-            if w~=0, w = w*Wf(l,m,n,R_1,R_lm1); end
+            if u~=0, u = u * getU(l,m,n,R_1,R_lm1); end
+            if v~=0, v = v * getV(l,m,n,R_1,R_lm1); end
+            if w~=0, w = w * getW(l,m,n,R_1,R_lm1); end
             R_l(m+l+1,n+l+1) = u + v + w;
         end
     end
@@ -122,46 +122,46 @@ end
 
 
 % functions to compute terms U, V, W of Eq.8.1 (Table II)
-function [ret] = U(l,m,n,R_1,R_lm1)
+function [ret] = getU(l,m,n,R_1,R_lm1)
 
-ret = P(0,l,m,n,R_1,R_lm1);
+ret = getP(0,l,m,n,R_1,R_lm1);
 
 end
 
-function [ret] = V(l,m,n,R_1,R_lm1)
+function [ret] = getV(l,m,n,R_1,R_lm1)
 
 if (m==0)
-    p0 = P(1,l,1,n,R_1,R_lm1);
-    p1 = P(-1,l,-1,n,R_1,R_lm1);
+    p0 = getP(1,l,1,n,R_1,R_lm1);
+    p1 = getP(-1,l,-1,n,R_1,R_lm1);
     ret = p0+p1;
 else
     if (m>0)
         d = (m==1);
-        p0 = P(1,l,m-1,n,R_1,R_lm1);
-        p1 = P(-1,l,-m+1,n,R_1,R_lm1);        
+        p0 = getP(1,l,m-1,n,R_1,R_lm1);
+        p1 = getP(-1,l,-m+1,n,R_1,R_lm1);        
         ret = p0*sqrt(1+d) - p1*(1-d);
     else
         d = (m==-1);
-        p0 = P(1,l,m+1,n,R_1,R_lm1);
-        p1 = P(-1,l,-m-1,n,R_1,R_lm1);        
+        p0 = getP(1,l,m+1,n,R_1,R_lm1);
+        p1 = getP(-1,l,-m-1,n,R_1,R_lm1);        
         ret = p0*(1-d) + p1*sqrt(1+d);
     end
 end
 
 end
 
-function [ret] = Wf(l,m,n,R_1,R_lm1)
+function [ret] = getW(l,m,n,R_1,R_lm1)
 
 if (m==0)
     error('should not be called')
 else
     if (m>0)
-        p0 = P(1,l,m+1,n,R_1,R_lm1);
-        p1 = P(-1,l,-m-1,n,R_1,R_lm1);        
+        p0 = getP(1,l,m+1,n,R_1,R_lm1);
+        p1 = getP(-1,l,-m-1,n,R_1,R_lm1);        
         ret = p0 + p1;
     else
-        p0 = P(1,l,m-1,n,R_1,R_lm1);
-        p1 = P(-1,l,-m+1,n,R_1,R_lm1);        
+        p0 = getP(1,l,m-1,n,R_1,R_lm1);
+        p1 = getP(-1,l,-m+1,n,R_1,R_lm1);        
         ret = p0 - p1;
     end
 end
@@ -169,7 +169,7 @@ end
 end
 
 % function to compute term P of U,V,W (Table II)
-function [ret] = P(i,l,a,b,R_1,R_lm1)
+function [ret] = getP(i,l,a,b,R_1,R_lm1)
 
 ri1 = R_1(i+2,1+2);
 rim1 = R_1(i+2,-1+2);
