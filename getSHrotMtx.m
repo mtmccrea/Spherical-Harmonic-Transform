@@ -114,8 +114,8 @@ end
 % if the rotation matrix is needed for complex SH, then get it from the one
 % for real SH by the real-to-complex-transformation matrices
 if isequal(basisType, 'complex')
-    W = complex2realSHMtx(L);
-    R = W.'*R*conj(W);
+    W_real = complex2realSHMtx(L);
+    R = W_real.'*R*conj(W_real);
 end
 
 end
