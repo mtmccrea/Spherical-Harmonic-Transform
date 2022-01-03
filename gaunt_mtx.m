@@ -2,7 +2,7 @@ function A = gaunt_mtx(N1, N2, N)
 %GAUNT_MTX Construct a matrix of Gaunt coefficients for complex SHs
 %
 % GAUNT_MTX constructs the (N1+1)^2x(N2+1)^2x(N+1)^2 matrix of Gaunt 
-% coefficients which represent the instegral of three spherical harmonics 
+% coefficients which represent the integral of three spherical harmonics 
 % such as
 % G^q_{q',q''} = \int_\Omega Y_{q'}Y_{q''}Y^*_{q} \mathrm{d}\Omega.
 %

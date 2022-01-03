@@ -64,6 +64,7 @@ hold on
 triangulated.Facecolor = 'interp';
 triangulated.Edgecolor = 'k';
 triangulated.FaceVertexCData = CData;
+triangulated.EdgeAlpha = 0.2;
 patch(triangulated)
 xlabel('x')
 ylabel('y')
